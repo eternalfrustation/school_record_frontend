@@ -1,6 +1,2 @@
 #!/bin/sh
-while true
-do
-    find lib/ -name '*.dart' | \
-        entr -d -p kill -USR1 $(cat ~/.tmp/flutter.pid)
-done
+flutter run --pid-file ~/.tmp/flutter.pid --web-port 45123  --web-renderer html
