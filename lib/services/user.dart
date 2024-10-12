@@ -217,6 +217,16 @@ class User {
   String get name => "$fname $lname";
   String get photoUrl => "$baseUrl/users/photo/$id";
 
+  DataField get dataField => DataField(
+          title: name,
+		  subTitle: role.toString(),
+          photo: photo ? photoUrl : null,
+          link: "/user?id=$id",
+          data: {
+            "Date Of Birth: ": dob.toString(),
+            'Contact: ': contact,
+            "E-Mail: ": email,
+          });
   Future<List<User>?> searchUser(String name, Role role, int schoolId) async {
     var resp = await webClient.get(Uri.parse(
         "$baseUrl/search/user?name=$name&school_id=$schoolId&role=${role.toString()}"));

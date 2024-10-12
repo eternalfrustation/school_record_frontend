@@ -54,15 +54,13 @@ class _SearchTableState extends State<SearchTable> {
 
 class DataField {
   final String? title;
+  final String? subTitle;
   final String? photo;
   final String? link;
   final Map<String, String> data;
 
   DataField(
-      {required this.title,
-      required this.photo,
-      required this.link,
-      required this.data});
+      {this.subTitle, this.title, this.photo, this.link, required this.data});
 }
 
 class DataInfo extends StatelessWidget {
@@ -99,6 +97,7 @@ class DataRow extends StatelessWidget {
                     FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage, image: data.photo!),
                     if (data.title != null) Text(data.title!),
+                    if (data.subTitle != null) Text(data.subTitle!),
                     DataInfo(data: data.data)
                   ])
                 : DataInfo(data: data.data)));
