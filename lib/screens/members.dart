@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../components/school_info.dart';
 import '../../services/user.dart';
+import '../components/search_table.dart';
 import '../components/user_info.dart';
-import '../search_table.dart';
 
 class Members extends StatefulWidget {
   const Members({super.key, this.id});

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -100,6 +102,10 @@ class DataRow extends StatelessWidget {
                     if (data.subTitle != null) Text(data.subTitle!),
                     DataInfo(data: data.data)
                   ])
-                : DataInfo(data: data.data)));
+                : Column(children: [
+                    if (data.title != null) Text(data.title!),
+                    if (data.subTitle != null) Text(data.subTitle!),
+                    DataInfo(data: data.data)
+                  ])));
   }
 }

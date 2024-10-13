@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/browser_client.dart';
 import 'package:intl/intl.dart';
 
-import '../search_table.dart';
+import '../components/search_table.dart';
 
 final webClient = BrowserClient()..withCredentials = true;
 
@@ -79,11 +79,11 @@ class School {
   }
   DataField get dataField => DataField(
           title: name,
-          photo: photo ? photoUrl : null,
+          photo: photo ? null : photoUrl,
           link: "/school?id=$id",
           data: {
-            "Board": board.toJson(),
-            'Subscribed Since': subscriptionStart.toIso8601String(),
+            "Board: ": board.toJson(),
+            'Subscribed Since: ': subscriptionStart.toIso8601String(),
             "Address: ": address,
           });
 
@@ -219,8 +219,8 @@ class User {
 
   DataField get dataField => DataField(
           title: name,
-		  subTitle: role.toString(),
-          photo: photo ? photoUrl : null,
+          subTitle: role.toString(),
+          photo: photo ? null : photoUrl,
           link: "/user?id=$id",
           data: {
             "Date Of Birth: ": dob.toString(),
@@ -503,6 +503,7 @@ class Classroom {
   int id;
   String section;
   Standard standard;
+  bool photo;
   int schoolId;
 
   Classroom({
@@ -510,14 +511,24 @@ class Classroom {
     required this.section,
     required this.standard,
     required this.schoolId,
+    required this.photo,
   });
 
+  String get photoUrl => "$baseUrl/classroom/photo/$id";
+
+  DataField get dataField => DataField(
+      title: standard.toString(),
+      subTitle: section,
+      photo: photo ? null : photoUrl ,
+      link: "/classroom?id=$id",
+      data: {});
   // Factory method to create Classroom instance from JSON
   factory Classroom.fromJson(Map<String, dynamic> json) {
     return Classroom(
       id: json['id'],
       section: json['section'],
       standard: StandardExtension.fromJson(json['standard']),
+      photo: json['photo'],
       schoolId: json['school_id'],
     );
   }
