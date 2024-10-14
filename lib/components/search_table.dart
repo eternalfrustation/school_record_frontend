@@ -94,18 +94,15 @@ class DataRow extends StatelessWidget {
               }
             : null,
         child: Card(
-            child: data.photo != null
-                ? Row(children: [
-                    FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage, image: data.photo!),
-                    if (data.title != null) Text(data.title!),
-                    if (data.subTitle != null) Text(data.subTitle!),
-                    DataInfo(data: data.data)
-                  ])
-                : Column(children: [
-                    if (data.title != null) Text(data.title!),
-                    if (data.subTitle != null) Text(data.subTitle!),
-                    DataInfo(data: data.data)
-                  ])));
+            child: Row(children: [
+          if (data.photo != null)
+            FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage, image: data.photo!),
+          Column(children: [
+            if (data.title != null) Text(data.title!),
+            if (data.subTitle != null) Text(data.subTitle!),
+            DataInfo(data: data.data)
+          ])
+        ])));
   }
 }

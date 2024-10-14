@@ -83,7 +83,7 @@ class School {
           link: "/school?id=$id",
           data: {
             "Board: ": board.toJson(),
-            'Subscribed Since: ': subscriptionStart.toIso8601String(),
+            'Subscribed Since: ': DateFormat.yMMMd().format(subscriptionStart),
             "Address: ": address,
           });
 
@@ -223,7 +223,7 @@ class User {
           photo: photo ? null : photoUrl,
           link: "/user?id=$id",
           data: {
-            "Date Of Birth: ": dob.toString(),
+            "Date Of Birth: ": DateFormat.yMMMd().format(dob),
             'Contact: ': contact,
             "E-Mail: ": email,
           });
@@ -519,7 +519,7 @@ class Classroom {
   DataField get dataField => DataField(
       title: standard.toString(),
       subTitle: section,
-      photo: photo ? null : photoUrl ,
+      photo: photo ? null : photoUrl,
       link: "/classroom?id=$id",
       data: {});
   // Factory method to create Classroom instance from JSON

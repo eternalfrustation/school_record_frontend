@@ -29,7 +29,8 @@ class InfoCard extends StatelessWidget {
         if (data.subTitle != null) Text(data.subTitle!),
         ...firstTwo
       ]),
-      ...skipTwo
+      ...skipTwo,
+				if (buttons != null) Row(children: buttons!),
     ]));
   }
 }
