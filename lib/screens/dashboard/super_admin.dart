@@ -20,11 +20,15 @@ class _SuperAdminDashboardState extends State<SuperAdminDashboard> {
   Widget build(BuildContext context) {
     return Consumer<UserState>(builder: (context, userState, child) {
       return SearchTable(
-          button: TextButton(
-              onPressed: () {
-                context.go("/create/school");
-              },
-              child: const Text("Add School")),
+          extraSearchWidgets: [
+            SizedBox(
+                width: 150,
+                child: TextButton(
+                    onPressed: () {
+                      context.go("/create/school");
+                    },
+                    child: const Text("Add School")))
+          ],
           label: "Search schools",
           defaultList: userState.user!
               .getSchools()

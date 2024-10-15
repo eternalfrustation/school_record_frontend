@@ -6,16 +6,16 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:school_record_frontend/services/user.dart';
 
-class SchoolEditPage extends StatefulWidget {
+class SchoolEdit extends StatefulWidget {
   final int? id;
-  const SchoolEditPage({super.key, this.id});
+  const SchoolEdit({super.key, this.id});
 
   @override
-  State<StatefulWidget> createState() => _SchoolEditPageState();
+  State<StatefulWidget> createState() => _SchoolEditState();
 }
 
-class _SchoolEditPageState extends State<SchoolEditPage>
-    with AfterLayoutMixin<SchoolEditPage> {
+class _SchoolEditState extends State<SchoolEdit>
+    with AfterLayoutMixin<SchoolEdit> {
   Future<School?>? schoolFuture;
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {

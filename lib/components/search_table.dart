@@ -7,14 +7,14 @@ import 'package:transparent_image/transparent_image.dart';
 class SearchTable extends StatefulWidget {
   final Future<List<DataField>?>? Function(String) searchFunction;
   final Future<List<DataField>?>? defaultList;
+  final List<Widget>? extraSearchWidgets;
   final String? label;
-  final TextButton? button;
   const SearchTable(
       {super.key,
       required this.searchFunction,
       required this.defaultList,
       required this.label,
-      required this.button});
+      this.extraSearchWidgets});
 
   @override
   State<StatefulWidget> createState() => _SearchTableState();
@@ -38,7 +38,7 @@ class _SearchTableState extends State<SearchTable> {
             });
           },
         )),
-        SizedBox(width: 150, child: widget.button)
+        if (widget.extraSearchWidgets != null) ...widget.extraSearchWidgets!,
       ]),
       FutureBuilder<List<DataField>?>(
           future: widget.defaultList,

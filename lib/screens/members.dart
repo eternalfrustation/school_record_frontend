@@ -2,43 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/school_info.dart';
 import '../../services/user.dart';
+import '../components/enum_dropdown.dart';
 import '../components/search_table.dart';
-import '../components/user_info.dart';
 
-class Members extends StatefulWidget {
-  const Members({super.key, this.id});
+class Users extends StatefulWidget {
+  const Users({super.key, this.id});
   final int? id;
 
   @override
-  State<StatefulWidget> createState() => _MembersState();
+  State<StatefulWidget> createState() => _UsersState();
 }
 
-class _MembersState extends State<Members> {
+class _UsersState extends State<Users> {
   final searchController = TextEditingController();
   List<User> users = [];
 
   final roleController = TextEditingController();
-  Role selectedRole = Role.TEACHER;
+  Role? selectedRole;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserState>(builder: (context, userState, child) {
+      final user = userState.user!;
       return SearchTable(
-          button: TextButton(
-              onPressed: () {
-                context.go("/create/member?id=${widget.id}");
-              },
-              child: const Text("Add User")),
           label: "Search users",
-          defaultList: userState.user!
-              .searchUser(
-                  "", selectedRole, widget.id ?? userState.user!.school_id)
+          extraSearchWidgets: [
+            Expanded(
+                child: EnumDropdownFormField<Role>(
+              onChange: (v) {
+                setState(() {
+                  selectedRole = v;
+                });
+              },
+              optionsList:
+                  Role.values.where((v) => v != Role.SUPER_ADMIN).toList(),
+            )),
+            SizedBox(
+                width: 150,
+                child: TextButton(
+                    onPressed: () {
+                      context.go("/create/member?id=${widget.id}");
+                    },
+                    child: const Text("Add User")))
+          ],
+          defaultList: user
+              .searchUser("", selectedRole ?? user.role,
+                  widget.id ?? userState.user!.school_id)
               .then((u) => u?.map((s) => s.dataField).toList()),
           searchFunction: (s) => userState.user
-              ?.searchUser(
-                  s, selectedRole, widget.id ?? userState.user!.school_id)
+              ?.searchUser(s, selectedRole ?? user.role,
+                  widget.id ?? userState.user!.school_id)
               .then((u) => u?.map((s) => s.dataField).toList()));
     });
   }

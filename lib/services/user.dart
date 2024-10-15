@@ -517,9 +517,9 @@ class Classroom {
   String get photoUrl => "$baseUrl/classroom/photo/$id";
 
   DataField get dataField => DataField(
-      title: standard.toString(),
+      title: standard.name,
       subTitle: section,
-      photo: photo ? null : photoUrl,
+      photo: photo ? photoUrl : null,
       link: "/classroom?id=$id",
       data: {});
   // Factory method to create Classroom instance from JSON

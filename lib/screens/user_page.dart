@@ -4,8 +4,6 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../components/delete_dialog.dart';
 import '../components/info_card.dart';

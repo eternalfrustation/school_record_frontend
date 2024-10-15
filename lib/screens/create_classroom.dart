@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:school_record_frontend/services/user.dart';
 
+import '../components/enum_dropdown.dart';
+
 class CreateClassroom extends StatefulWidget {
   final int? id;
   const CreateClassroom({super.key, this.id});
@@ -36,25 +38,12 @@ class _CreateClassroomState extends State<CreateClassroom> {
               return null;
             },
           ),
-          DropdownButtonFormField<Standard>(
-            value: selectedStandard,
-            decoration: const InputDecoration(labelText: "Standard"),
-            items: Standard.values.map((Standard standard) {
-              return DropdownMenuItem<Standard>(
-                value: standard,
-                child: Text(standard.toString().split('.').last),
-              );
-            }).toList(),
-            onChanged: (Standard? newValue) {
+          EnumDropdownFormField(
+            optionsList: Standard.values,
+            onChange: (Standard? newValue) {
               setState(() {
                 selectedStandard = newValue;
               });
-            },
-            validator: (value) {
-              if (value == null) {
-                return "Standard is required";
-              }
-              return null;
             },
           ),
           TextFormField(
@@ -73,7 +62,7 @@ class _CreateClassroomState extends State<CreateClassroom> {
                 final classroom = await userState.user?.addClassroom(
                   section: sectionController.text,
                   standard: selectedStandard!,
-				  whatsappLink: whatsappLinkController.text,
+                  whatsappLink: whatsappLinkController.text,
                   schoolId: isSuperAdmin
                       ? widget.id ?? userState.user!.school_id
                       : userState.user!.school_id,

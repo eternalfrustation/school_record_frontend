@@ -62,19 +62,13 @@ class _SchoolPageState extends State<SchoolPage>
                   onPressed: () {
                     context.go("/school/classroom?school_id=${school.id}");
                   },
-                  child: const Text("View list of all classes"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.go("/students?school_id=${school.id}");
-                  },
-                  child: const Text("View list of students"),
+                  child: const Text("View list of all classrooms"),
                 ),
                 TextButton(
                   onPressed: () {
                     context.go("/announcements?school_id=${school.id}");
                   },
-                  child: const Text("Go to the announcements page"),
+                  child: const Text("View list of all announcements"),
                 )
               ])
             : const CircularProgressIndicator();

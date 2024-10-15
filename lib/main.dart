@@ -6,7 +6,6 @@ import 'package:school_record_frontend/screens/create_school.dart';
 import 'package:school_record_frontend/screens/school_page.dart';
 import 'package:school_record_frontend/screens/sign_in.dart';
 
-import 'screens/classroom_details_page.dart';
 import 'screens/classroom_page.dart';
 import 'screens/create_classroom.dart';
 import 'screens/create_user.dart';
@@ -87,11 +86,6 @@ class _SchoolRecordsAppState extends State<SchoolRecordsApp> {
                   const MaterialPage(child: Scaffold(body: Dashboard())),
             ),
             GoRoute(
-              path: '/create/school',
-              pageBuilder: (context, state) =>
-                  const MaterialPage(child: Scaffold(body: CreateSchool())),
-            ),
-            GoRoute(
                 path: '/school',
                 pageBuilder: (context, state) => MaterialPage(
                       child: Scaffold(
@@ -100,81 +94,242 @@ class _SchoolRecordsAppState extends State<SchoolRecordsApp> {
                                   state.uri.queryParameters["id"] ?? ""))),
                     )),
             GoRoute(
+              path: '/school/create',
+              pageBuilder: (context, state) =>
+                  const MaterialPage(child: Scaffold(body: SchoolCreate())),
+            ),
+            GoRoute(
               path: '/school/edit',
               pageBuilder: (context, state) => MaterialPage(
                   child: Scaffold(
-                      body: SchoolEditPage(
+                      body: SchoolEdit(
                           id: int.tryParse(
                               state.uri.queryParameters["id"] ?? "")))),
             ),
             GoRoute(
-              path: '/members',
+                path: '/school/courses',
+                pageBuilder: (context, state) => MaterialPage(
+                      child: Scaffold(
+                          body: Courses(
+                              id: int.tryParse(
+                                  state.uri.queryParameters["id"] ?? ""))),
+                    )),
+            GoRoute(
+                path: '/school/courses/create',
+                pageBuilder: (context, state) => MaterialPage(
+                      child: Scaffold(
+                          body: CoursesCreate(
+                              id: int.tryParse(
+                                  state.uri.queryParameters["id"] ?? ""))),
+                    )),
+            GoRoute(
+              path: '/users',
               pageBuilder: (context, state) => MaterialPage(
                   child: Scaffold(
-                      body: Members(
+                      body: Users(
                           id: int.tryParse(
                               state.uri.queryParameters["school_id"] ?? "")))),
             ),
             GoRoute(
-              path: '/create/member',
+              path: '/users/create',
               pageBuilder: (context, state) => MaterialPage(
                   child: Scaffold(
-                      body: CreateMember(
+                      body: UserCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["school_id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/users/edit',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: UserEdit(
                           id: int.tryParse(
                               state.uri.queryParameters["id"] ?? "")))),
             ),
             GoRoute(
-                path: '/user',
-                pageBuilder: (context, state) => MaterialPage(
-                      child: Scaffold(
-                          body: UserPage(
-                              id: int.tryParse(
-                                  state.uri.queryParameters["id"] ?? ""))),
-                    )),
-            GoRoute(
-                path: '/classroom',
-                pageBuilder: (context, state) => MaterialPage(
-                      child: Scaffold(
-                          body: ClassroomDetailsPage(
-                              id: int.tryParse(
-                                  state.uri.queryParameters["id"] ?? ""))),
-                    )),
-            GoRoute(
-                path: '/school/classroom',
-                pageBuilder: (context, state) => MaterialPage(
-                      child: Scaffold(
-                          body: ClassroomPage(
-                              id: int.tryParse(
-                                  state.uri.queryParameters["school_id"] ?? ""))),
-                    )),
-            GoRoute(
-                path: '/create/classroom',
-                pageBuilder: (context, state) => MaterialPage(
-                      child: Scaffold(
-                          body: CreateClassroom(
-                              id: int.tryParse(
-                                  state.uri.queryParameters["id"] ?? ""))),
-                    )),
-            /*
-            GoRoute(
-              path: '/classes',
-              pageBuilder: (context, state) =>
-								// TODO: Make the School classes page
-                  const MaterialPage(child: Scaffold(body: SchoolMembers())),
+              path: '/profile',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: Profile(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
             ),
             GoRoute(
-              path: '/students',
-              pageBuilder: (context, state) =>
-								// TODO: Make the School students page
-                  const MaterialPage(child: Scaffold(body: SchoolMembers())),
+              path: '/school/announcements',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: SchoolAnnouncements(
+                          id: int.tryParse(
+                              state.uri.queryParameters["school_id"] ?? "")))),
             ),
             GoRoute(
-              path: '/announcements',
-              pageBuilder: (context, state) =>
-								// TODO: Make the Announcements page
-                  const MaterialPage(child: Scaffold(body: Announcements page())),
+              path: '/school/announcements/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: SchoolAnnouncementsCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["school_id"] ?? "")))),
             ),
-						*/
+            GoRoute(
+              path: '/school/announcements/edit',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: SchoolAnnouncementsEdit(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classrooms',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: Classrooms(
+                          id: int.tryParse(
+                              state.uri.queryParameters["school_id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classrooms/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomsCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["school_id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classrooms/edit',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomsEdit(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: Classroom(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/students',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomStudents(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/students/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomStudentsCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/assignment',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: Assignments(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/assignment/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: AssignmentsCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/assignment/edit',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: AssignmentsEdit(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/teacher',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: Teachers(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/teacher/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: TeacherCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/student',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: Students(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/student/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: StudentCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/announcement',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomAnnouncements(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/announcement/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomAnnouncementsCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/announcement/edit',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomAnnouncementsEdit(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/assignment',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomAssignments(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/assignment/create',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomAssignmentsCreate(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
+            GoRoute(
+              path: '/school/classroom/assignment/edit',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: Scaffold(
+                      body: ClassroomAssignmentsEdit(
+                          id: int.tryParse(
+                              state.uri.queryParameters["id"] ?? "")))),
+            ),
           ],
         ),
         theme: ThemeData(
