@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-
-import '../services/user.dart';
 
 Widget deleteDialog(
     BuildContext context, String name, Future? Function() onClick) {
@@ -16,24 +13,20 @@ Widget deleteDialog(
           context.pop();
         },
       ),
-      Consumer<UserState>(
-        builder: (context, userState, child) {
-          return TextButton(
-            child: const Text("Delete"),
-            onPressed: () async {
-              final result = onClick();
-              if (result != null) {
-                await result;
-              }
+      TextButton(
+        child: const Text("Delete"),
+        onPressed: () async {
+          final result = onClick();
+          if (result != null) {
+            await result;
+          }
 
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Successfully deleted school $name')),
-                );
-                context.pop();
-              }
-            },
-          );
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Successfully deleted school $name')),
+            );
+            context.pop();
+          }
         },
       )
     ],

@@ -1,4 +1,3 @@
-import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -90,7 +89,7 @@ class DataRow extends StatelessWidget {
     return TextButton(
         onPressed: data.link != null
             ? () {
-                context.go(data.link!);
+				context.go(data.link!);
               }
             : null,
         child: Card(

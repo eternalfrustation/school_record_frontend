@@ -1,0 +1,38 @@
+Start -> Login
+
+Login -> Super Admin Dashboard: Super Admin
+Login -> Principal / School Admin Dashboard: Principal
+Login -> Teacher Dashboard: Teacher
+Login -> Student Dashboard: Student
+
+Super Admin Dashboard -> Searchable list of schools
+Super Admin Dashboard -> Add Schools
+Searchable list of schools -> School Info
+School Info -> Edit School: >= SCHOOL_ADMIN
+School Info -> Delete School: SUPER_ADMIN
+
+Principal / School Admin Dashboard -> School Info
+
+Teacher Dashboard -> Searchable list of all Classrooms : Limited to only assigned classrooms
+
+School Info -> Searchable list of all Classrooms -> Classroom Info
+School Info -> Add Course
+Classroom Info -> Assign a teacher to this classroom with a particular course: >= SCHOOL_ADMIN
+
+Searchable list of all Classrooms -> Create / Edit / Delete Classroom: >= SCHOOL_ADMIN
+School Info -> Searchable list of all Teachers
+School Info -> Searchable list of all Students
+School Info -> School Wide Announcements: >= SCHOOL_ADMIN
+School Wide Announcements -> Create School Wide Announcements
+School Wide Announcements -> Edit School Wide Announcements
+School Wide Announcements -> Delete School Wide Announcements
+
+Classroom Info -> List of Teachers assigned
+Classroom Info -> List of students assigned
+Classroom Info -> Add Students to this classroom
+Classroom Info -> Add a Classroom Wide announcement: >= Teacher
+Classroom Info -> View Classroom Wide announcement
+Classroom Info -> Add a course assignment: >= Teacher
+Classroom Info -> View Assigned Assignments
+Classroom Info -> Submit Assignment: Student
+Student Dashboard -> Classroom Info: Assigned Classroom

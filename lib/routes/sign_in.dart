@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:school_record_frontend/routes/dashboard.dart';
+import 'package:school_record_frontend/services/user.dart';
 
-import '../services/user.dart';
+class SignInRoute extends GoRouteData {
+  const SignInRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const SignIn();
+}
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -17,10 +23,10 @@ class _SignInState extends State<SignIn> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Column(
-          children: [
+    return Column(children: [
+      Form(
+          key: _formKey,
+          child: Column(children: [
             TextFormField(
                 controller: emailController,
                 autofocus: true,
@@ -45,38 +51,28 @@ class _SignInState extends State<SignIn> {
                   }
                   return null;
                 }),
-            Consumer<UserState>(builder: (context, userState, child) {
-              return TextButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    if (await userState.signIn(
-                        emailController.text, passwordController.text)) {
-                      if (context.mounted) {
-                        context.go("/dashboard");
-                      }
-                    } else {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Incorrect email or password')),
-                        );
-                      }
+            TextButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  User.signIn(emailController.text, passwordController.text)
+                      .then((user) {
+                    if (context.mounted) {
+                      const DashboardRoute().go(context);
                     }
-                  }
-                },
-                child: const Text("Log In"),
-              );
-            })
-          ],
-        ));
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
+                  }).catchError((e) {
+                    print(e);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Incorrect email or password')),
+                      );
+                    }
+                  });
+                }
+              },
+              child: const Text("Log In"),
+            )
+          ]))
+    ]);
   }
 }
